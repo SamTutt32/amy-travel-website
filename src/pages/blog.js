@@ -4,16 +4,29 @@ import Layout from "../components/Layout"
 import Banner from "../components/Banner"
 import { HtmlContent } from "../components/ui"
 import Content from "../components/Content"
+import BlogListing from "../components/BlogListing"
 
-const IndexPage = () => {
+const BlogPage = () => {
   const {
-    contentfulHome: { heading, content },
+    contentfulBlogListing: { heading, content },
+    allContentfulBlog: { nodes },
   } = useStaticQuery(graphql`
-    query IndexPageQuery {
-      contentfulHome {
+    query BlogPageQuery {
+      contentfulBlogListing {
         heading
         content {
           raw
+        }
+      }
+      allContentfulBlog {
+        nodes {
+          title
+          introduction
+          featuredImage {
+            gatsbyImageData(width: 900, height: 600)
+            title
+          }
+          slug
         }
       }
     }
@@ -24,9 +37,10 @@ const IndexPage = () => {
       <main>
         <Banner heading={heading} />
         <Content content={content} />
+        <BlogListing items={nodes} />
       </main>
     </Layout>
   )
 }
 
-export default IndexPage
+export default BlogPage

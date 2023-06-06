@@ -1,13 +1,17 @@
-import * as React from "react"
-import "../styles.css"
-import { Slice } from "gatsby"
+import React from "react"
+import GlobalStyle from "../styles/GlobalStyle"
+import Header from "./Header"
+import Footer from "./Footer"
+import CookieNotice from "./CookieNotice"
 
 const Layout = ({ children }) => {
   return (
     <>
-      <Slice alias="header" />
+      <GlobalStyle />
+      <Header />
       {children}
-      <Slice alias="footer" />
+      <Footer />
+      <CookieNotice />
     </>
   )
 }
