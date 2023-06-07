@@ -1,5 +1,11 @@
-import { createGlobalStyle } from 'styled-components';
-import { brandFonts, elementColours, fontSize, fontWeights } from '../styles';
+import { createGlobalStyle } from "styled-components"
+import {
+  brandColours,
+  brandFonts,
+  elementColours,
+  fontSize,
+  fontWeights,
+} from "../styles"
 
 const GlobalStyle = createGlobalStyle`
   *,
@@ -14,6 +20,7 @@ const GlobalStyle = createGlobalStyle`
     -webkit-font-smoothing: antialiased;
     -ms-text-size-adjust: 100%;
     -webkit-text-size-adjust: 100%;
+    background-color: ${brandColours.quaternary};
   }
 
   body {
@@ -91,6 +98,6 @@ const GlobalStyle = createGlobalStyle`
       color: ${elementColours.textColour};
     }
   }
-`;
+`
 
-export default GlobalStyle;
+export default GlobalStyle

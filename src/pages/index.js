@@ -7,11 +7,16 @@ import Content from "../components/Content"
 
 const IndexPage = () => {
   const {
-    contentfulHome: { heading, content },
+    contentfulHome: { heading, location, profilePicture, content },
   } = useStaticQuery(graphql`
     query IndexPageQuery {
       contentfulHome {
         heading
+        profilePicture {
+          gatsbyImageData
+          title
+        }
+        location
         content {
           raw
         }
@@ -22,7 +27,12 @@ const IndexPage = () => {
   return (
     <Layout>
       <main>
-        <Banner heading={heading} />
+        <Banner
+          heading={heading}
+          image={profilePicture}
+          location={location}
+          isHome={true}
+        />
         <Content content={content} />
       </main>
     </Layout>

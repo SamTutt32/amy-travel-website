@@ -4,38 +4,66 @@ import { GatsbyImage } from "gatsby-plugin-image"
 import styled from "styled-components"
 import {
   brandColours,
+  breakpointSizes,
+  fluidFontSize,
+  fontSize,
   minBreakpointQuery,
   standardColours,
   standardTransition,
 } from "../styles"
-import { Container, Svg } from "./ui"
+import { Container, Link, Svg } from "./ui"
 import instagramLogo from "../images/instagram-logo.inline.svg"
 import facebookLogo from "../images/facebook-logo.inline.svg"
 import tcLogo from "../images/tc-logo.inline.svg"
 
 const StyledFooter = styled.footer`
   position: relative;
+  display: grid;
+  justify-items: center;
+  align-items: center;
 `
 
 const StyledImage = styled(GatsbyImage)`
   width: 100%;
+  height: 100%;
+  grid-area: 1/1/1/1;
 `
 
-const StyledOuter = styled.div`
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-`
-
-const StyledContainer = styled(Container)`
-  max-width: 500px;
-`
-
-const StyledInner = styled.div`
+const StyledContent = styled.div`
   background-color: ${standardColours.transparentWhite(0.9)};
   text-align: center;
-  padding: 50px;
+  grid-area: 1/1/1/1;
+  z-index: 1;
+  padding: 25px 50px;
+`
+
+const StyledHeading = styled.h3`
+  ${fluidFontSize(
+    "20px",
+    "28px",
+    breakpointSizes.tiny,
+    breakpointSizes.xxxxlarge
+  )};
+  margin-bottom: 25px;
+`
+
+const StyledLink = styled.a`
+  display: block;
+  margin-bottom: 10px;
+
+  ${minBreakpointQuery.small`
+    ${fontSize(18)}
+  `}
+
+  &:hover {
+    text-decoration: underline;
+  }
+`
+const StyledText = styled.p`
+  ${minBreakpointQuery.small`
+    ${fontSize(18)}
+  `}
+  margin-bottom: 25px;
 `
 
 const StyledLogoLinks = styled.div`
@@ -44,17 +72,36 @@ const StyledLogoLinks = styled.div`
   grid-template-columns: repeat(3, 60px);
   align-items: center;
   justify-content: center;
-  padding: 10px 0;
 `
 
 const StyledLogo = styled(Svg)`
   filter: grayscale(100);
-  height: 100%;
-  width: 100%;
+  width: 40px;
+  height: 40px;
   transition: ${standardTransition("filter")};
 `
 
-const StyledLogoLink = styled.a`
+const StyledInternalLinksWrapper = styled.div`
+  width: 100%;
+  background-color: ${standardColours.charcoalGrey};
+  padding: 25px 0;
+  color: ${standardColours.white};
+`
+
+const StyledInternalLinks = styled.div`
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+`
+
+const StyledInternalLink = styled(Link)`
+  text-align: center;
+  &:hover {
+    color: ${brandColours.primary};
+  }
+`
+
+const StyledLogoLink = styled(Link)`
   display: block;
 
   &:hover {
@@ -73,6 +120,7 @@ const Footer = () => {
       travelCounsellorsLink,
       email,
       phoneNumber,
+      internalLinks,
     },
   } = useStaticQuery(graphql`
     query FooterQuery {
@@ -84,62 +132,75 @@ const Footer = () => {
         instagramLink {
           text
           link {
-            url
+            ...LinkFragment
           }
         }
         facebookLink {
           text
           link {
-            url
+            ...LinkFragment
           }
         }
         travelCounsellorsLink {
           text
           link {
-            url
+            ...LinkFragment
           }
         }
         email
         phoneNumber
+        internalLinks {
+          text
+          link {
+            ...LinkFragment
+          }
+        }
       }
     }
   `)
   return (
     <StyledFooter>
       <StyledImage image={image.gatsbyImageData} alt={image.title} />
-      <StyledOuter>
-        <StyledContainer>
-          <StyledInner>
-            <h3>Contact Me</h3>
-            <a href={`mailto:${email}`}>Send me an email</a>
-            <a href={`tel:${phoneNumber}`}>01212590087</a>
-            <p>Find me on my socials</p>
-            <StyledLogoLinks>
-              <StyledLogoLink
-                href={instagramLink.link.url}
-                target="_blank"
-                rel="noreferrer"
-              >
-                <StyledLogo image={instagramLogo} />
-              </StyledLogoLink>
-              <StyledLogoLink
-                href={facebookLink.link.url}
-                target="_blank"
-                rel="noreferrer"
-              >
-                <StyledLogo image={facebookLogo} />
-              </StyledLogoLink>
-              <StyledLogoLink
-                href={travelCounsellorsLink.link.url}
-                target="_blank"
-                rel="noreferrer"
-              >
-                <StyledLogo image={tcLogo} />
-              </StyledLogoLink>
-            </StyledLogoLinks>
-          </StyledInner>
-        </StyledContainer>
-      </StyledOuter>
+      <StyledContent>
+        <StyledHeading>Contact Me</StyledHeading>
+        <StyledLink href={`mailto:${email}`}>{email}</StyledLink>
+        <StyledLink href={`tel:${phoneNumber}`}>01212590087</StyledLink>
+        <StyledText>Find me on my socials</StyledText>
+        <StyledLogoLinks>
+          <StyledLogoLink
+            to={instagramLink.link}
+            target="_blank"
+            rel="noreferrer"
+          >
+            <StyledLogo image={instagramLogo} />
+          </StyledLogoLink>
+          <StyledLogoLink
+            to={facebookLink.link}
+            target="_blank"
+            rel="noreferrer"
+          >
+            <StyledLogo image={facebookLogo} />
+          </StyledLogoLink>
+          <StyledLogoLink
+            to={travelCounsellorsLink.link}
+            target="_blank"
+            rel="noreferrer"
+          >
+            <StyledLogo image={tcLogo} />
+          </StyledLogoLink>
+        </StyledLogoLinks>
+      </StyledContent>
+      <StyledInternalLinksWrapper>
+        <Container>
+          <StyledInternalLinks>
+            {internalLinks.map(({ text, link }, id) => (
+              <StyledInternalLink key={id} to={link}>
+                {text}
+              </StyledInternalLink>
+            ))}
+          </StyledInternalLinks>
+        </Container>
+      </StyledInternalLinksWrapper>
     </StyledFooter>
   )
 }
