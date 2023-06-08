@@ -1,11 +1,16 @@
 import React from "react"
 import styled from "styled-components"
 import { minBreakpointQuery, sectionMargins } from "../styles"
-import { Container } from "./ui"
+import { Container, Heading } from "./ui"
 import BlogCard from "./BlogCard"
 
 const StyledBlogListing = styled.section`
   ${sectionMargins()};
+`
+
+const StyledHeading = styled(Heading)`
+  text-align: center;
+  margin-bottom: 40px;
 `
 
 const StyledItems = styled.div`
@@ -21,9 +26,10 @@ const StyledItems = styled.div`
   `}
 `
 
-const BlogListing = ({ items }) => (
+const BlogListing = ({ heading, items }) => (
   <StyledBlogListing>
     <Container>
+      {heading && <StyledHeading>{heading}</StyledHeading>}
       <StyledItems>
         {items.map(({ title, introduction, featuredImage, slug }, id) => (
           <BlogCard

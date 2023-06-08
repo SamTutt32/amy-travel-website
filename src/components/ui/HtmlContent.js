@@ -127,7 +127,7 @@ export const StyledHtmlContent = styled.div`
       position: relative;
       padding-left: 20px;
 
-      &:before {
+      /* &:before {
         content: "";
         position: absolute;
         top: 8px;
@@ -137,7 +137,7 @@ export const StyledHtmlContent = styled.div`
         width: 8px;
         background-color: ${brandColours.primary};
         border-radius: 50%;
-      }
+      } */
     }
   }
 

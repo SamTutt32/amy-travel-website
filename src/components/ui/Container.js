@@ -1,5 +1,5 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react"
+import styled from "styled-components"
 
 const StyledContainer = styled.div`
   margin-right: auto;
@@ -8,11 +8,11 @@ const StyledContainer = styled.div`
   padding-right: 30px;
   width: 100%;
   max-width: ${({ narrow, wide }) =>
-    narrow ? '1000' : wide ? '1800' : '1200'}px;
-`;
+    narrow ? "960" : wide ? "1800" : "1200"}px;
+`
 
 export const Container = ({ narrow, wide, children, ...props }) => (
   <StyledContainer narrow={narrow} wide={wide} {...props}>
     {children}
   </StyledContainer>
-);
+)

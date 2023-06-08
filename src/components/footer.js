@@ -68,10 +68,14 @@ const StyledText = styled.p`
 
 const StyledLogoLinks = styled.div`
   display: grid;
-  gap: 20px;
+  gap: 10px;
   grid-template-columns: repeat(3, 60px);
   align-items: center;
   justify-content: center;
+
+  ${minBreakpointQuery.small`
+    gap: 10px;
+  `}
 `
 
 const StyledLogo = styled(Svg)`
@@ -92,6 +96,7 @@ const StyledInternalLinks = styled.div`
   display: flex;
   gap: 20px;
   justify-content: center;
+  flex-wrap: wrap;
 `
 
 const StyledInternalLink = styled(Link)`
@@ -163,7 +168,7 @@ const Footer = () => {
       <StyledImage image={image.gatsbyImageData} alt={image.title} />
       <StyledContent>
         <StyledHeading>Contact Me</StyledHeading>
-        <StyledLink href={`mailto:${email}`}>{email}</StyledLink>
+        <StyledLink href={`mailto:${email}`}>Send me an email</StyledLink>
         <StyledLink href={`tel:${phoneNumber}`}>01212590087</StyledLink>
         <StyledText>Find me on my socials</StyledText>
         <StyledLogoLinks>

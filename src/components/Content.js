@@ -1,6 +1,6 @@
 import React from "react"
-import styled, { css } from "styled-components"
-import { minBreakpointQuery, sectionMargins, standardColours } from "../styles"
+import styled from "styled-components"
+import { sectionMargins } from "../styles"
 import { Container, HtmlContent } from "./ui"
 
 const StyledContent = styled.section`

@@ -2,7 +2,7 @@ import { Link } from "gatsby"
 import { GatsbyImage } from "gatsby-plugin-image"
 import React from "react"
 import styled from "styled-components"
-import { brandColours, standardColours, standardTransition } from "../styles"
+import { brandColours, standardTransition } from "../styles"
 
 const StyledBlogCard = styled.article`
   border-radius: 15px;

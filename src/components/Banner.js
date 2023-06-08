@@ -3,6 +3,7 @@ import styled from "styled-components"
 import {
   breakpointSizes,
   fluidFontSize,
+  maxBreakpointQuery,
   sectionMargins,
   standardColours,
 } from "../styles"
@@ -23,9 +24,18 @@ const StyledHeading = styled.h1`
   )};
 `
 
-const StyledUnderline = styled.div`
-  margin-top: 40px;
+const StyledInner = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+
+  ${maxBreakpointQuery.tsmall`
+    flex-direction: column;
+ `}
 `
+
+const StyledUnderline = styled.div``
 
 const StyledLocation = styled.p`
   ${fluidFontSize(
@@ -57,13 +67,15 @@ const Banner = ({ heading, image, location, isHome }) => (
   <StyledBanner>
     <Container>
       <StyledHeading>{heading}</StyledHeading>
-      {image && <StyledImage image={image.gatsbyImageData} alt={image.alt} />}
-      {(location || isHome) && (
-        <StyledUnderline>
-          {location && <StyledLocation>{location}</StyledLocation>}
-          {isHome && <StyledName>Amy Cunningham</StyledName>}
-        </StyledUnderline>
-      )}
+      <StyledInner>
+        {image && <StyledImage image={image.gatsbyImageData} alt={image.alt} />}
+        {(location || isHome) && (
+          <StyledUnderline>
+            {location && <StyledLocation>{location}</StyledLocation>}
+            {isHome && <StyledName>Amy Cunningham</StyledName>}
+          </StyledUnderline>
+        )}
+      </StyledInner>
     </Container>
   </StyledBanner>
 )

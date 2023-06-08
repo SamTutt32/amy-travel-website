@@ -2,7 +2,6 @@ import React from "react"
 import { useStaticQuery, graphql } from "gatsby"
 import Layout from "../components/Layout"
 import Banner from "../components/Banner"
-import { HtmlContent } from "../components/ui"
 import Content from "../components/Content"
 
 const IndexPage = () => {
