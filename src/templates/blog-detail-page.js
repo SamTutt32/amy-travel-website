@@ -34,7 +34,7 @@ export const BlogDetailPageTemplateQuery = graphql`
         title
       }
     }
-    allContentfulBlog(filter: { id: { ne: $id } }) {
+    allContentfulBlog(filter: { id: { ne: $id } }, limit: 4) {
       nodes {
         title
         introduction

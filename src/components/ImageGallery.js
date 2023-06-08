@@ -1,6 +1,7 @@
 import React, { useState } from "react"
 import styled from "styled-components"
 import {
+  brandColours,
   fontSize,
   maxBreakpointQuery,
   minBreakpointQuery,
@@ -45,6 +46,10 @@ const StyledIndex = styled.p`
   margin-top: auto;
   margin-bottom: 10px;
   margin-right: 10px;
+  margin-left: auto;
+  border-radius: 5%;
+  padding: 5px 10px;
+  background-color: ${brandColours.primary};
 `
 
 const StyledSlider = styled(Slider)`

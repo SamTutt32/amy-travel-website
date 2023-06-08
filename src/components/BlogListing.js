@@ -1,15 +1,15 @@
 import React from "react"
 import styled from "styled-components"
 import { minBreakpointQuery, sectionMargins } from "../styles"
-import { Container, Heading } from "./ui"
+import { Button, Container, Heading } from "./ui"
 import BlogCard from "./BlogCard"
 
 const StyledBlogListing = styled.section`
   ${sectionMargins()};
+  text-align: center;
 `
 
 const StyledHeading = styled(Heading)`
-  text-align: center;
   margin-bottom: 40px;
 `
 
@@ -24,6 +24,10 @@ const StyledItems = styled.div`
   ${minBreakpointQuery.mlarge`
     grid-template-columns: repeat(4, 1fr);
   `}
+`
+
+const StyledButton = styled(Button)`
+  margin-top: 40px;
 `
 
 const BlogListing = ({ heading, items }) => (
@@ -41,6 +45,7 @@ const BlogListing = ({ heading, items }) => (
           />
         ))}
       </StyledItems>
+      {heading && <StyledButton to="/blog/">View all blog posts!</StyledButton>}
     </Container>
   </StyledBlogListing>
 )
