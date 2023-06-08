@@ -29,7 +29,7 @@ const StyledHeading = styled.h2`
 const BlogCard = ({ title, introduction, image, slug }) => (
   <StyledBlogCard>
     <StyledItem>
-      <Link to={slug}>
+      <Link to={`/blog/${slug}`}>
         <GatsbyImage image={image.gatsbyImageData} alt={image.title} />
         <StyledTextWrapper>
           <StyledHeading>{title}</StyledHeading>

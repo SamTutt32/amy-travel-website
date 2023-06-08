@@ -1,9 +1,11 @@
 import React, { useState } from "react"
 import styled from "styled-components"
 import {
+  fontSize,
   maxBreakpointQuery,
   minBreakpointQuery,
   sectionMargins,
+  standardColours,
 } from "../styles"
 import { Container, Heading, Slider } from "./ui"
 import { GatsbyImage } from "gatsby-plugin-image"
@@ -24,6 +26,25 @@ const StyledInner = styled.div``
 const StyledHeading = styled(Heading)`
   text-align: center;
   margin-bottom: 40px;
+`
+
+const StyledFeaturedImageWrapper = styled.div`
+  display: grid;
+`
+
+const StyledFeaturedImage = styled(GatsbyImage)`
+  grid-area: 1/1/1/1;
+`
+
+const StyledIndex = styled.p`
+  grid-area: 1/1/1/1;
+  text-align: right;
+  z-index: 1;
+  color: ${standardColours.white};
+  ${fontSize(20)};
+  margin-top: auto;
+  margin-bottom: 10px;
+  margin-right: 10px;
 `
 
 const StyledSlider = styled(Slider)`
@@ -65,10 +86,16 @@ const ImageGallery = ({ images }) => {
       <StyledContainer narrow={true}>
         <StyledInner>
           <StyledHeading>Gallery</StyledHeading>
-          <GatsbyImage
-            image={images[currentImage].gatsbyImageData}
-            alt={images[currentImage].alt}
-          />
+          <StyledFeaturedImageWrapper>
+            <StyledFeaturedImage
+              image={images[currentImage].gatsbyImageData}
+              alt={images[currentImage].alt}
+            />
+            <StyledIndex>{`${currentImage + 1} of ${
+              images.length
+            }`}</StyledIndex>
+          </StyledFeaturedImageWrapper>
+
           <StyledSlider {...sliderOptions}>
             {images.map(({ gatsbyImageData, alt }, i) => (
               <StyledSlide key={i} onClick={() => setCurrentImage(i)}>
